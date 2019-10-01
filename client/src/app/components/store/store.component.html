@@ -1,0 +1,105 @@
+<div   class="uk-section uk-padding-remove" uk-height-viewport="expand: true; ">
+      
+    <!-- SPINNNER -->
+    <div *ngIf="!displayShop"  class="uk-animation-slide-bottom uk-text-center ">
+            <img class="uk-margin-auto" data-src="assets/images/pirate.png" style="position:relative;top:180px" width="100" alt="טודלי - משחקים עם השראה" uk-img> 
+            <div><span  uk-spinner="ratio: 6.5"></span></div>   
+    </div>
+   
+    <!-- SMALL NAVBAR (uk-visible@m ) -->
+    <div *ngIf="displayShop" >
+        
+        <div style="display:block; right: 3%;max-width:7rem; position:fixed;" class="uk-visible@m" uk-navbar-transparent uk-navbar-dropdown>
+            <h3 class="uk-margin-remove-bottom">כרטיסיות</h3>
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+                    <li (click)="activateClass(product)" [ngClass]="{'uk-active':product.active}"  style="border-bottom:1px solid #6a6864" *ngFor="let product of products; let i=index; let first=first; let last=last" >
+                        <a *ngIf="!first" uk-scroll href="{{'#' + products[(i)  % products.length]['name']}}">{{product['name']}} <div style="font-size:0.7rem">מחיר  &#8362;{{product.price}}</div></a> 
+                        <a *ngIf="first" uk-scroll href="{{'#top'}}">{{product?.name}} <div style="font-size:0.7rem">מחיר  &#8362;{{product.price}}</div></a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- ITEM DISPLAY -->
+    <div *ngIf="displayShop" >
+        
+        <div style="margin-top:10px" *ngFor="let product of products; index as i; last as last; first as first">
+            
+            <div *ngIf="first" id="{{product.name}}" uk-height-viewport="expand: true; "  class="uk-flex storeitem"  >
+                <div  class=" uk-text-center ">
+                    <!--<div  uk-slideshow="min-height: 250;animation: fade; autoplay:false; autoplay-interval:4000; ratio: 112:50; pause-on-hover:false">
+                        <ul style="z-index: 10" class="uk-slideshow-items"  >
+                            <li *ngFor="let src of product.imgURLs; let index=index" >
+                               <img  data-src="{{src}}" uk-img >     
+                            </li>
+                        </ul>   
+                        <ul class="uk-margin-remove-bottom uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                    </div>-->
+                    <div uk-slider="center: false">
+                        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+                            <ul style="z-index: 10"class="uk-slider-items uk-grid">
+                                <li *ngFor="let src of product.imgURLs; let index=index" >
+                                    <img  data-src="{{src}}" uk-img >     
+                                </li>
+                            </ul>
+                            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                        </div>
+                        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                    </div>
+                    
+                    <span uk-spinner="ratio: 1" style="float: left;position: relative;top: -30%;right: -48%;z-index: 0;"></span>
+                    <h2  class="uk-margin-remove-top" >{{product?.name}}</h2>
+                    <button uk-toggle="target: #main-shopping-cart; animation: uk-animation-slide-left; cls: uk" style="margin-bottom: 0.4rem;border-color: rgba(19, 19, 19, 0.7);" class="uk-text-right uk-button uk-button-default uk-button-small" (click)='addCart(product.name)' >הוספה לעגלה - מחיר &#8362;{{product.price}}</button>
+                    <div class="uk-text-right">
+                        <p class="uk-margin-remove-bottom"  [innerHtml]="product.description"></p>
+                    </div>
+                    
+                    <div class="uk-text-center">
+                        <a  *ngIf="!last" uk-scroll href="{{'#' + products[(i + 1)  % products.length]['name']}}" class="uk-icon-link" uk-icon="icon: chevron-down; ratio: 3">לפריט הבא</a>
+                        
+                    </div>
+                </div>
+            </div> 
+            <div *ngIf="!first" id="{{product?.name}}" uk-height-viewport="expand: true; "  class="uk-flex " uk-parallax="opacity: 0.6,1; scale: 0.5,1; viewport: 0.45;" >
+                <div  class=" uk-text-center ">
+                    <div class="uk-height-small"></div>
+                    
+                    <!--<div uk-slideshow="min-height: 250;animation: push; autoplay:true; autoplay-interval:4000; ratio: 112:50; pause-on-hover:false">
+                            <ul style="z-index: 10" class="uk-slideshow-items"  >
+                                <li *ngFor="let src of product.imgURLs" >
+                                    <img  data-src="{{src}}" uk-img > 
+                                </li>
+                            </ul> 
+                        <ul class="uk-margin-remove-bottom uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                    </div>--> 
+                    <div uk-slider="center: false">
+                        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+                            <ul style="z-index: 10"class="uk-slider-items uk-grid">
+                                <li *ngFor="let src of product.imgURLs; let index=index" >
+                                    <img  data-src="{{src}}" uk-img >     
+                                </li>
+                            </ul>
+                            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                        </div>
+                        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                    </div>
+                    
+                    <h2  class="uk-margin-remove-top" >{{product.name}}</h2>
+                    <button uk-toggle="target: #main-shopping-cart; animation: uk-animation-slide-top-small; cls: uk" style="margin-bottom: 0.4rem;border-color: rgba(19, 19, 19, 0.7);" class="uk-text-right uk-button uk-button-default uk-button-small" (click)='addCart(product.name)' >הוספה לעגלה - מחיר &#8362;{{product.price}}</button>
+                    <div class="uk-text-right">
+                        <p class="uk-margin-remove-bottom"  [innerHtml]="product.description"></p>
+                    </div>
+                    <div class="uk-text-center">
+                        <a *ngIf="!last" uk-scroll href="{{'#' + products[(i + 1)  % products.length]['name']}}" class="uk-icon-link" uk-icon="icon: chevron-down; ratio: 3"></a>
+                        <a *ngIf="last" uk-scroll href="#top" class="uk-icon-link" uk-icon="icon: chevron-up; ratio: 3">בחזרה למעלה</a>
+                    </div>
+                    <div class="uk-height-small"></div>
+                </div>
+            </div>  
+        </div>     
+    </div>
+
+    
+    

@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label>כתובת אימייל</label>
+          <input type="email" formControlName="email" class="form-control uk-input">
+        </div>
+        <div class="form-group">
+          <label>סיסמה</label>
+          <input type="password" class="form-control uk-input" formControlName="password">
+          <label class="error">{{errorMessage}}</label>
+        </div>
+
+        <button class="uk-text-center" style="border:1px solid black" type="submit" (click)="tryLoginOrRegister(loginForm.value)" class="uk-button uk-button-secondary uk-margin-small-top uk-margin-small-bottom">{{inLoginMode ? 'כניסה' : 'הירשם'}}</button>
+      </form>
+    </div>
+  </div>
+
+    <div class="uk-text-center">
+        <p> -------- או --------</p>
+        <div class="col-md-4 col-md-offset-4">
+          <button *ngIf="inLoginMode" style="cursor:pointer; width:235px;height:42px; background-image:url('../assets/images/log_in_with_fb.png')" type="button"  (click)="tryFacebookLogin()"></button>
+          <button *ngIf="!inLoginMode" style="cursor:pointer; width:235px;height:42px; background-image:url('../assets/images/register_with_fb.png')" type="button"  (click)="tryFacebookLogin()"></button>
+        </div>
+      </div>
+      <div class="uk-text-center  uk-margin-small-top">
+        <div class="col-md-4 col-md-offset-4">
+          <button *ngIf="inLoginMode" ngStyle=""style="cursor:pointer; width:235px;height:42px; background-image:url('../assets/images/log_in_with_google.png')" type="button"  (click)="tryGoogleLogin()"></button>
+          <button *ngIf="!inLoginMode" style="cursor:pointer; width:235px;height:42px; background-image:url('../assets/images/register_with_google.png')" type="button"  (click)="tryFacebookLogin()"></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <p *ngIf="inLoginMode">אין לכם חשבון? <a (click)="changeLoginMode()">צרו חשבון כעת!</a></p>
+          <p *ngIf="!inLoginMode">יש לכם חשבון? <a (click)="changeLoginMode()">היכנסו עכשיו!</a></p>
+
+        </div>
+      </div>
+
+ 
+
+  
+  
+</div>

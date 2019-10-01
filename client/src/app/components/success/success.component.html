@@ -1,0 +1,37 @@
+<div class="uk-section uk-padding-remove">
+    
+        <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-column" uk-height-viewport="offset-bottom: footer; offset-top: true; ">
+            <img data-src="assets/images/birds.svg" width="200" alt="טודלי משחקים עם השראה הזמנות" uk-img>
+        
+            <div *ngIf="results=='waiting'" class="uk-animation-scale-up">
+                <p>ממתין לפרטי ההזמנה...</p>
+                <div class="uk-text-center"><span uk-spinner></span></div>
+            </div>
+            <div *ngIf="results=='error'" class="uk-animation-scale-up">
+                <p class="uk-label uk-label-warning"> מספר ההזמנה לא נמצא</p>
+            </div>
+            <div *ngIf="results=='ok'" class="uk-animation-scale-up uk-text-center">
+                <div class="uk-heading-small uk-margin-remove-bottom uk-margin-remove-top">שלום {{payment['payer'].payer_info.first_name}},</div>
+                <div>
+                    <p class="uk-margin-remove-top uk-margin-remove-bottom">להלן פרטי הזמנה מספר {{invoice}}</p>
+                    <ul class="uk-margin-remove-top uk-flex-right uk-text-right">
+                        <li *ngFor="let product of payment['products']; index as i" class="uk-margin-top-small uk-padding-remove-horizontal">{{product.name}} - <a (click)="onDownload(i)" >להורדה לחצו כאן</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            
+           
+        </div>     
+    
+</div>
+
+
+
+<div id="modal-center" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical ">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <p>אנא המתינו להורדת <span class="uk-text-primary">{{getProdName(index) }}</span> <span *ngIf="!downloadErr" class="uk-float-left"  uk-spinner></span></p>
+        <span *ngIf="downloadErr" class="uk-label uk-label-warning">ההורדה נכשלה - פג תוקף הקישור</span>
+    </div>
+</div>
