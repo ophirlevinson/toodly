@@ -91,7 +91,7 @@ app.get("/checkRecaptcha", async (req, res) => {
         uri: 'https://recaptcha.google.com/recaptcha/api/siteverify',
         method: 'POST', 
         formData: {
-            secret: '6LfVn7sUAAAAAHNBrUYg67JGE_K5oDLOUB4r5qV7',
+            secret: 'your-secret',
             response: response
         },
         json: true
