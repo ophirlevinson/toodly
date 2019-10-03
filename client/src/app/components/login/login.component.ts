@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'src/app/services/message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'modal-login',
@@ -15,14 +16,25 @@ export class LoginComponent {
   errorMessage: string = '';
   successMessage: string = '';
   inLoginMode: boolean = true;
+  subscription : Subscription;
+  disableForm : boolean = true;
 
   constructor(
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+   
   ) {
     this.createForm();
+    this.subscription = this.messageService.getMessage().subscribe(message => {
+      switch(message.type) {
+        case this.messageService.RECAPTCHA_SUCCESS : {this.disableForm = false ; break};
+        case this.messageService.RECAPTCHA_FAILURE : {this.disableForm = false ;this.errorMessage='משהו באימות השתבש'; break};
+        case this.messageService.USER_LOGGED_OUT : {this.disableForm = true; break};
+        
+      }
+    })
   }
 
   createForm() {
@@ -84,7 +96,10 @@ export class LoginComponent {
   }
 
   tryLoginOrRegister(value) {
-    this.inLoginMode ? this.tryLogin(value) : this.tryRegister(value)
+    if ((!this.inLoginMode && !this.disableForm) || this.inLoginMode) {
+      this.inLoginMode ? this.tryLogin(value) : this.tryRegister(value)
+    }
+    
   }
 
   changeLoginMode() {

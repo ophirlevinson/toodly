@@ -16,17 +16,20 @@ import { environment } from 'src/environments/environment';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ReCaptchaDirective } from './components/recaptcha/recaptcha.component';
 
 import { ReactiveFormsModule } from '@angular/forms'
 import { UserResolver } from './components/user/user.resolver';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     SuccessComponent,
     StoreComponent,
+    ReCaptchaDirective,
     PageNotFoundComponent,
     HomeComponent, 
     LoginComponent, 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener, NgZone } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MessageService } from './services/message.service';
 import { PurchaseService } from './services/purchase.service';
@@ -10,6 +10,7 @@ import { UserService } from './services/user.service';
 
 declare var UIkit: any;
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,10 +18,13 @@ declare var UIkit: any;
 })
 
 
-
 export class AppComponent {
 
-
+  @HostListener('hide', ['$event.target'])
+  onUnSelect(el) {
+    console.log(el); // element that triggered event, in this case HTMLUnknownElement
+    console.log('unselect triggered');
+  }
 
   messages: any[] = [];
   subscription: Subscription;
@@ -30,14 +34,16 @@ export class AppComponent {
   blink:boolean = false;
   interval
   bodyEl:Object;
+  loginModal:Object;
   inLoginMode:boolean = true;
 
   
-  constructor(private route: ActivatedRoute, private el: ElementRef, private router:Router, private purchaseService:PurchaseService,  private messageService: MessageService, public authService:AuthService, private userService: UserService ) {
+  constructor(private ngZone: NgZone, private route: ActivatedRoute, private el: ElementRef, private router:Router, private purchaseService:PurchaseService,  private messageService: MessageService, public authService:AuthService, private userService: UserService ) {
     router.events.subscribe((event: Event) => { 
       UIkit.offcanvas('#offcanvas-nav-primary').hide() 
     })
     this.bodyEl = this.el.nativeElement.closest('body');
+   
     this.startTimer()
     this.userService.getCurrentUser().then( (res) => {console.log(res)}).catch ( function(err) {console.log(err)});
     
@@ -82,7 +88,12 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    
+    console.log( UIkit.modal('#login').$el)
+   
+    this.ngZone.runOutsideAngular(() => {
+      console.log('df')
+      UIkit.modal('#login').$el.addEventListener('show.uk.modal', function(event){console.log('ophir')});
+    })
   }
 
   addToCart(item) {

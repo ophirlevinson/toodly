@@ -15,6 +15,8 @@ export class MessageService {
     STARTLOGIN = 'Start login'
     CHANGE_LOGIN_MODE = 'Change_login_mode'
     REGISTER_SUCCESSFUL = "Register_successful"
+    RECAPTCHA_SUCCESS = "Recaptcha _success"
+    RECAPTCHA_FAILURE = "Recaptcha_failure"
     
     private subject = new Subject<any>();
 
