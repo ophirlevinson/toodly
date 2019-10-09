@@ -22,6 +22,37 @@ function randInvoice(){
     return random_num
 } 
 
+async function sendMessage(message) {
+    const mailOptions = {
+        from: 'טודלי - משחקים עם השראה <no-reply@toodly.co>', // Something like: Jane Doe <janedoe@gmail.com>
+        to: payment.payer.payer_info.email,
+        subject: 'הודעה מאתר טודלי - משחקים עם השראה', // email subject
+        attachments: [
+           {
+                filename: 'logo.png',
+                path: 'https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Flogo.png?alt=media&token=8d50367e-4a82-4844-9880-209e4892f1e0',
+                cid: 'toodly-logo@cid'
+           } 
+        ],
+        html: `
+        <div style=";text-decoration-style:initial;text-decoration-color:initial;font-size:1.3em;font-family:&quot;Open Sans Hebrew&quot;,serif;direction:rtl">
+            <h2 style="margin:0px"><span style="color:rgb(255,127,42)">הודעה מאתר טודלי</span></h2>
+            <p style="margin:0px">שם: <span>`+message.name+`</span>.</p>
+            <p style="margin:0px">אימייל: <span>`+message.email+`</span>.</p>
+            <p style="margin:0px">שם: <span>`+message.message+`</span>.</p>
+            <div><img src="cid:toodly-logo@cid" alt="img" width="150" /></div>
+            <a href="https://toodly.co">www.toodly.co</a>
+        ` // email content in HTML
+    };
+    try {
+        result = await transporter.sendMail(mailOptions)
+        console.log(result)
+        return true
+    }
+    catch (error) {
+        return error
+    }
+}
 
 async function sendMailClient (payment){ 
     const mailOptions = {
@@ -119,5 +150,7 @@ async function sendMailAdmin (payment){  //transactions[0]
 module.exports.randInvocie = randInvoice;
 module.exports.sendMailClient = sendMailClient;
 module.exports.sendMailAdmin = sendMailAdmin;
+module.exports.sendMessage = sendMessage;
+
 
 

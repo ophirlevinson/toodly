@@ -27,9 +27,9 @@ const {Firestore} = require('@google-cloud/firestore');
 const firestore = new Firestore();
 const paypal = require('paypal-rest-sdk');
 const bodyParser = require("body-parser");
-const rp = require('request-promise')
-
- 
+const rp = require('request-promise');
+const admin = require('firebase-admin');
+admin.initializeApp();
 
 // Automatically allow cross-origin requests
 
@@ -51,12 +51,13 @@ paypal.configure({
 // when decoded successfully, the ID Token content will be added as `req.user`.
 const authenticate = async (req, res, next) => {
   if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
+    
     res.status(403).send('Unauthorized to <a href="http://toodly.co">toodly.co</a>');
     return;
   }
   const idToken = req.headers.authorization.split('Bearer ')[1];
   try {
-    const decodedIdToken = await admin.auth().verifyIdToken(idToken);
+    let decodedIdToken = await admin.auth().verifyIdToken(idToken);
     req.user = decodedIdToken;
     next();
     return;
@@ -72,10 +73,74 @@ Toodly API
 
 ***************************/
 
-app.get("/",  async (req, res) => {
+app.get("/", async (req, res) => {
   res.send(
     {result:"API for toodly.co, version 1.1"}
   )
+})
+
+/**************************
+
+Get All projects
+
+***************************/
+
+app.get("/projects", async (req, res) => {
+  let projects = []
+  try {
+    const  projectsCollection =  firestore.collection('projects').orderBy('order');
+    let snapshot = await projectsCollection.get()
+    snapshot.forEach(doc => {
+      let data = doc.data();
+      projects.push(data)
+    });
+    res.send({result:'ok', data:projects})
+  }
+  catch (error) {
+    res.send({result:'error', data:'Could not retireive proejcts' + error})
+  }
+  
+})
+
+/**************************
+
+sendMessage
+
+***************************/
+app.get("/sendmessage", async (req, res) => {
+  let orders = []
+  try {
+    let message = JSON.parse(req.query.message)
+    res.send({result:'ok',message:message})
+    // helper.sendMessage(req.query.message)
+  }
+  catch (error) {
+    res.send({result:'error', data:'Could not send message' + error})
+  }
+  
+})
+/**************************
+
+Get All orders
+
+***************************/
+
+app.get("/orders",authenticate, async (req, res) => {
+  let orders = []
+  try {
+    const  ordersCollection =  firestore.collection('orders');
+    let snapshot = await ordersCollection.get()
+    snapshot.forEach(doc => {
+      let data = doc.data();
+      data.invoice_number = doc.id;
+      orders.push(data)
+    });
+    res.send({result:'ok', data:orders})
+  }
+  catch (error) {
+    res.send({result:'error', data:'Could not retireive data' + error})
+  }
+  
 })
 
 /**************************
@@ -91,7 +156,7 @@ app.get("/checkRecaptcha", async (req, res) => {
         uri: 'https://recaptcha.google.com/recaptcha/api/siteverify',
         method: 'POST', 
         formData: {
-            secret: 'your-secret',
+            secret: '6LfVn7sUAAAAAHNBrUYg67JGE_K5oDLOUB4r5qV7',
             response: response
         },
         json: true
