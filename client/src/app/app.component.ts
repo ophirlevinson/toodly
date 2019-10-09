@@ -1,10 +1,9 @@
-import { Component, ElementRef, ViewChild, HostListener, NgZone } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MessageService } from './services/message.service';
 import { PurchaseService } from './services/purchase.service';
 import { Router, Event, ActivatedRoute } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
 
 // import 'p5';
 
@@ -20,15 +19,11 @@ declare var UIkit: any;
 
 export class AppComponent {
 
-  @HostListener('hide', ['$event.target'])
-  onUnSelect(el) {
-    console.log(el); // element that triggered event, in this case HTMLUnknownElement
-    console.log('unselect triggered');
-  }
+ 
 
   messages: any[] = [];
   subscription: Subscription;
-  user: Subscription = null;
+  user: string = null// Subscription = null;
   cartItems : Item[] = [];
   timeLeft: number = 2;
   blink:boolean = false;
@@ -38,17 +33,14 @@ export class AppComponent {
   inLoginMode:boolean = true;
 
   
-  constructor(private ngZone: NgZone, private route: ActivatedRoute, private el: ElementRef, private router:Router, private purchaseService:PurchaseService,  private messageService: MessageService, public authService:AuthService, private userService: UserService ) {
+  constructor(private route: ActivatedRoute, private el: ElementRef, private router:Router, private purchaseService:PurchaseService,  private messageService: MessageService, public authService:AuthService) {
     router.events.subscribe((event: Event) => { 
       UIkit.offcanvas('#offcanvas-nav-primary').hide() 
     })
     this.bodyEl = this.el.nativeElement.closest('body');
-   
     this.startTimer()
-    this.userService.getCurrentUser().then( (res) => {console.log(res)}).catch ( function(err) {console.log(err)});
     
-    
-    // subscribe to messages
+    // subscribe to messageService messages
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         switch(message.type) {
@@ -74,10 +66,7 @@ export class AppComponent {
             UIkit.notification({pos:'top-center',timeout:1000,message: '<div style="text-align:center;font-size:1rem"><span uk-icon="icon: check"></span>ברוכים הבאים לטודלי - משחקים עם השראה</div>'})
             UIkit.modal('#login').hide();
           }
-        }
-        
- 
-        
+        }   
       } else {
         // clear messages when empty message received
         this.messages = [];
@@ -88,11 +77,9 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    console.log( UIkit.modal('#login').$el)
-   
-    this.ngZone.runOutsideAngular(() => {
-      console.log('df')
-      UIkit.modal('#login').$el.addEventListener('show.uk.modal', function(event){console.log('ophir')});
+    UIkit.util.on('#login','hide',() => {
+      this.inLoginMode = true;
+      this.messageService.sendMessage({type:this.messageService.LOGIN_HIDE});
     })
   }
 
@@ -118,6 +105,8 @@ export class AppComponent {
     }
   }
 
+  // Calculate the total amount of cart items in curreny
+
   getTotal() {
     let total = 0
     this.cartItems.forEach (item => {
@@ -126,6 +115,7 @@ export class AppComponent {
     return total
   }
 
+   // Calculate the total qunatitiy of items in cart
   getQuantity() {
     let quantity = 0
     this.cartItems.forEach (item => {
@@ -135,6 +125,7 @@ export class AppComponent {
 
   }
 
+  // Remove an item from cart
   removeItem(index){
     this.cartItems.splice(index,1);
     if (this.cartItems.length == 0) {
@@ -145,6 +136,7 @@ export class AppComponent {
   toggle() {
     UIkit.modal('#cart').toggle();
   }
+
 
   pay() {
     this.purchaseService.pay(this.cartItems)
@@ -160,19 +152,13 @@ export class AppComponent {
         this.timeLeft--;
       } else {
         this.timeLeft = Math.floor(Math.random() * 6);;  //seconds between blinks
-        this.blink = true;
-        
-        this.bodyEl['style'].backgroundImage = "url('assets/images/cow1.svg')"
-       
-        
+        this.blink = true;  
+        this.bodyEl['style'].backgroundImage = "url('assets/images/cow1.svg')"  
         setTimeout( () => {
           this.blink = false
           this.bodyEl['style'].backgroundImage = "url('assets/images/cow2.svg') , url('assets/images/cow1.svg')"
         },400)  //time of blink
-        
       }
-     
     },1000)
   }
-
 }

@@ -1,0 +1,40 @@
+<div class="uk-section uk-padding-remove">
+        <div class="uk-container uf uk-margin-remove-top">
+            <div class="uk-flex  uk-flex-middle uk-flex-column" uk-height-viewport="offset-bottom: footer; offset-top: true; ">
+               
+                <div *ngIf="orders?.length <= 0" >
+                    <span class="uk-margin-large-top"  uk-spinner="ratio: 4.5"></span>
+                </div>
+                <div class="uk-table-responsive"> 
+        
+                    <table *ngIf="orders?.length > 0" class="uk-table uk-table-small uk-table-divider">
+                        <thead>
+                            <tr >
+                                <th style="text-align:right"class="uk-table-expand" >שם</th>
+                                <th style="text-align:right"class="uk-table-expand" >אימייל</th>
+                                <th style="text-align:right"class="uk-table-expand" >תאריך</th>
+                                
+                                <th style="text-align:right" class="uk-table-shrink">מחיר</th>
+                                <th style="text-align:right"class="" >שלח אימייל</th> 
+                                <th style="text-align:right"class="" >אתר הורדה</th>   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of orders; index as i">
+                                <td >{{order?.payer.payer_info.first_name + ' ' + order?.payer.payer_info.last_name}}</td>
+                                <td >{{order?.payer.payer_info.email}}</td>
+                                <td >{{order?.date | date}}</td>
+                                
+                                <td> &#8362;{{order?.amount.total}}</td>
+                                <td  (click)="sendEmail()"><span style="cursor:pointer" uk-icon="icon: mail; ratio: 1"></span></td>
+                                <td  (click)="goToDownloadPage(order?.invoice_number)"><span style="cursor:pointer" uk-icon="icon: download; ratio: 1"></span></td>
+                                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+               
+            </div>     
+        </div>
+    </div>
+    

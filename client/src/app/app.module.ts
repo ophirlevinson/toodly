@@ -1,7 +1,7 @@
 import { AuthGuard } from './services/auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -15,13 +15,15 @@ import { HomeComponent } from './components/home/home.component';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
-import { ProductsComponent } from './components/products/products.component';
+import { OrdersComponent } from './components/orders/orders.component';
 import { ReCaptchaDirective } from './components/recaptcha/recaptcha.component';
 
 import { ReactiveFormsModule } from '@angular/forms'
 import { UserResolver } from './components/user/user.resolver';
 import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
+import { TokenInterceptor } from './services/token.interceptor';
+import { AboutComponent } from './components/about/about.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { UserService } from './services/user.service';
     HomeComponent, 
     LoginComponent, 
     UserComponent, 
-    ProductsComponent,
+    AboutComponent,
+    ProjectsComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,13 @@ import { UserService } from './services/user.service';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ReactiveFormsModule,
   ],
-  providers: [AuthGuard, AuthService, UserService, UserResolver],
+  providers: [AuthGuard, AuthService, UserResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

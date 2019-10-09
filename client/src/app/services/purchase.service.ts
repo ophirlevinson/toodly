@@ -21,6 +21,15 @@ export class PurchaseService {
     return this.http.get(environment.serverURL + '/order/details?invoice='+invoice)
   }
 
+  getOrders () {
+    return this.http.get(environment.serverURL + '/orders')
+  }
+
+  getProjects () {
+    return this.http.get(environment.serverURL + '/projects')
+  }
+
+
   download (invoice: String, index:number) {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
@@ -35,9 +44,11 @@ export class PurchaseService {
     cartItems = cartItems.map( function(cart){ return {'name':cart.name, 'quantity':cart.quantity}})
     let url = environment.serverURL + '/pay?products='+JSON.stringify(cartItems)
     window.open(url, '_blank');
-    
-    
+  }
 
+  sendMessage(message) {
+    console.log(message)
+    return this.http.get(environment.serverURL + '/sendmessage' + JSON.stringify(message))
   }
 
   /*

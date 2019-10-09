@@ -37,6 +37,19 @@ export class LoginComponent {
     })
   }
 
+  ngOnInit() {
+    this.messageService.getMessage().subscribe(message => {
+      
+      if (message.type == this.messageService.LOGIN_HIDE) {
+        this.disableForm = true;
+        this.inLoginMode = true;
+      }
+    })
+       
+  }
+
+  
+
   createForm() {
     this.loginForm = this.fb.group({
       email: ['', Validators.required ],

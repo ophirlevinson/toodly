@@ -17,6 +17,7 @@ export class MessageService {
     REGISTER_SUCCESSFUL = "Register_successful"
     RECAPTCHA_SUCCESS = "Recaptcha _success"
     RECAPTCHA_FAILURE = "Recaptcha_failure"
+    LOGIN_HIDE = "Login_hide"
     
     private subject = new Subject<any>();
 

@@ -30,7 +30,7 @@
           <button *ngIf="!inLoginMode" style="cursor:pointer; width:235px;height:42px; background-image:url('../assets/images/register_with_google.png')" type="button"  (click)="tryFacebookLogin()"></button>
         </div>
       </div>
-      <div class="row">
+      <div *ngIf="false" class="row">
         <div class="col-md-4 col-md-offset-4">
           <p *ngIf="inLoginMode">אין לכם חשבון? <a (click)="changeLoginMode()">צרו חשבון כעת!</a></p>
           <p *ngIf="!inLoginMode">יש לכם חשבון? <a (click)="changeLoginMode()">היכנסו עכשיו!</a></p>

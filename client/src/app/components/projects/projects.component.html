@@ -1,0 +1,40 @@
+<div *ngIf="projects?.length <= 0" class="uk-text-center uk-flex uk-flex-center uk-flex-middle " uk-height-viewport="offset-bottom: footer; offset-top: true; " >
+                
+        <span class="uk-margin-large-top"  uk-spinner="ratio: 4.5"></span>
+</div>
+<div *ngIf="projects?.length > 0" uk-height-viewport="expand: true; " class="uk-animation-slide-bottom">
+        <div  style="direction:rtl" class="uk-grid-small uk-child-width-expand@s uk-text-center" uk-grid >
+                <div *ngFor="let project of projects; index as i;" class=" uk-width-1-3@m">
+                        <div  class="card"> <a [ngStyle]="{'background': 'url('+project.bg+')'}"  (click)="onProject(i)" title="{{project.name}}" ></a></div>
+                </div>     
+        </div>
+</div>
+
+
+<div id="modal-project" class="uk-modal-full" uk-modal>
+                <div class="uk-modal-dialog" [ngStyle]="{'background-color': (bgcolor ? bgcolor : '')}" >
+                    <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                    <div class="uk-grid-collapse uk-child-width-1-1@s uk-child-width-1-2@m uk-flex-middle" uk-grid>
+                      
+                        <div uk-slideshow="animation: fade; autoplay: true; pause-on-hover:false; autoplay-interval:4000" >
+                            <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
+                                    <ul class="uk-slideshow-items" uk-height-viewport>
+                                            <li *ngFor="let image of project['imgURLs']; index as i;"  >
+                                                    <div class="uk-background-cover" [ngStyle]="{'background-image': 'url('+ (image ? image : '') +')','background-size': ( image === 'https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fprojects%2F4%2F1.jpg?alt=media&token=16ee0f8e-1c7b-4c93-beb1-e16761477abc' ? 'contain' : 'cover')}" uk-height-viewport ></div>
+                                            </li>
+                                    </ul>
+                                    <a style="color:white" class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                                    <a style="color:white"  class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+                            </div>
+                        </div>
+                        <div class="uk-padding-large" (click)="onHide()">
+                              
+                                    <h1 [ngStyle]="{'color': textcolor }"class="uk-animation-slide-bottom"> {{project['name']}}</h1>
+                                    <h3 [ngStyle]="{'color': textcolor }" class="uk-animation-slide-left">{{project['headline']}}</h3>
+                                    <div [ngStyle]="{'color': textcolor }" class="uk-animation-slide-right"  [innerHtml]="project['desc']"></div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    

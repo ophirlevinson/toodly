@@ -27,7 +27,7 @@
                         <li><a routerLink="/store" routerLinkActive="active">חנות</a></li> 
                         <li><a routerLink="/projects" routerLinkActive="active">פרוייקטים</a></li> 
                         <li><a routerLink="/about" routerLinkActive="active">עלינו</a></li> 
-                        <li *ngIf="user"  ><a routerLink="/products" routerLinkActive="active">מוצרים</a></li> 
+                        <li *ngIf="user"  ><a routerLink="/orders" routerLinkActive="active">הזמנות</a></li> 
                         <li id="main-shopping-cart" class="shopping-cart" *ngIf="getQuantity() > 0">
                             <a uk-toggle="" href="#cart"><span uk-icon="icon: cart; ratio: 3"><span style="color:#333; position:relative;left:-1.8rem">{{getQuantity()}}</span></span>
                             </a>
@@ -65,7 +65,7 @@
                 <li class=""><a routerLink="/store" routerLinkActive="active">חנות</a></li> 
                 <li class=""><a routerLink="/projects" routerLinkActive="active">פרוייקטים</a></li> 
                 <li class=""><a routerLink="/about" routerLinkActive="active">עלינו</a></li>
-                <li *ngIf="user"  ><a routerLink="/products" routerLinkActive="active">מוצרים</a></li>  
+                <li *ngIf="user"  ><a routerLink="/orders" routerLinkActive="active">הזמנות</a></li>  
                 <li><a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button;ratio:1" uk-icon="facebook"></a></li> 
             </ul>
         </div>

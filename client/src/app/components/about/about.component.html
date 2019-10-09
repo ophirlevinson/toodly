@@ -1,0 +1,59 @@
+<!--<div class="uk-text-center uk-flex uk-flex-center uk-flex-middle " uk-height-viewport="offset-bottom: footer; offset-top: true; " >
+    <div class="uk-section-default" >
+        <div class="uk-section uk-light uk-background-cover" uk-height-viewport >
+            <div class="uk-container">
+                <h3>Section with Images</h3>
+    
+                <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <img uk-img data-src="https://i.ytimg.com/vi/X9GwXIYmuUk/maxresdefault.jpg"/>
+                        <p class="uk-text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                    </div>
+                    <div>
+                        <img uk-img data-src="https://i.ytimg.com/vi/X9GwXIYmuUk/maxresdefault.jpg"/>
+                        <p class="uk-text-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
+                    <div>
+                        <h3>מוזמנים ליצור קשר</h3>
+                        <form [formGroup]="msgForm" class="uk-text-right">
+                            <div class="form-group">
+                                <label>השם שלכם</label>
+                                <input formControlName="name" id="name" type="text"  class="form-control uk-input">
+                              
+                            </div>
+                            <div class="form-group">
+                                <label>כתובת האימייל שלכם</label>
+                                <input formControlName="email" id="email"  type="email"  class="form-control uk-input">
+                              
+                            </div>
+                            <div class="form-group uk-margin-small-bottom">
+                                <label>ההודעה שלכם</label>
+                                <textarea class="form-control  uk-textarea" formControlName="message"></textarea>
+                                <label class="error">{{errorMessage}}</label>
+                            </div>
+                            <button [disabled]="disableForm" class="uk-text-center" type="submit" (click)="onSubmit(msgForm.value)" class="uk-button uk-button-default uk-margin-small-bottom">שלח</button>
+                            <app-recaptcha for="about"></app-recaptcha>   
+                        </form>
+                    </div>
+                    <div>
+                        <img style="max-width:300px" data-src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Ftoodly_farm_girl.svg?alt=media&token=363558e4-4cc4-438b-af62-c52401eac3aa" uk-img/>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+        <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-column" uk-height-viewport="offset-bottom: footer; offset-top: true; ">
+            <img data-src="assets/images/logo_try1.svg" alt="" uk-img>
+            <div class="uk-heading-small uk-margin-remove-bottom uk-margin-remove-top">אנחנו בדיוק עובדים על עיצוב חדש</div>
+            <p class="uk-margin-remove-top"><a href="https://www.facebook.com/pg/toodlygames">בינתיים, תוכלו לבקר בדף הפייסבוק שלנו</a></p>
+            <a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button" uk-icon="facebook"></a>
+        </div>   
+
+    

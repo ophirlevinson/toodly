@@ -1,17 +1,19 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { UserService } from './user.service';
 import { MessageService } from './message.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable()
 export class AuthService {
 
-  constructor(
-   public afAuth: AngularFireAuth,
-   public userService: UserService,
-   public messageService : MessageService
-  ){}
+  constructor( public db: AngularFirestore, public afAuth: AngularFireAuth, public messageService : MessageService){ 
+    this.getCurrentUser().then( user => {
+      this.messageService.sendMessage({type:this.messageService.USER_LOGGED_IN, msg:this.getToken()})
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   doFacebookLogin(){
     return new Promise<any>((resolve, reject) => {
@@ -70,10 +72,12 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(res => {
-        this.messageService.sendMessage({type:this.messageService.USER_LOGGED_IN, msg:res})
-        // localStorage.setItem('user', JSON.stringify(res.user))
-        console.log(res.user)
-        
+        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then((idToken) => {
+          localStorage.setItem('token',idToken)
+          this.messageService.sendMessage({type:this.messageService.USER_LOGGED_IN, msg:idToken})
+        }).catch(function(error) {
+          console.error(error)
+        });
         resolve(res);
       }, err => reject(err))
     })
@@ -83,7 +87,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       if(firebase.auth().currentUser){
         this.afAuth.auth.signOut();
-        // localStorage.removeItem('token');
+        localStorage.removeItem('token');
         this.messageService.sendMessage({type:this.messageService.USER_LOGGED_OUT})
         resolve();
       }
@@ -91,6 +95,36 @@ export class AuthService {
         reject();
       }
     });
+  }
+
+  getToken(){
+    let token = localStorage.getItem('token') || null
+    return token;
+  }
+
+  getCurrentUser(){
+    return new Promise<any>((resolve, reject) => {
+      var user = firebase.auth().onAuthStateChanged((user) =>{
+        if (user) {
+          this.messageService.sendMessage({type:this.messageService.USER_CURRENT_USER, msg:user})
+          resolve(user);
+        } else {
+          reject('No user logged in');
+        }
+      })
+    })
+  }
+
+  updateCurrentUser(value){
+    return new Promise<any>((resolve, reject) => {
+      var user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: value.name,
+        photoURL: user.photoURL
+      }).then(res => {
+        resolve(res);
+      }, err => reject(err))
+    })
   }
 
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -17,7 +16,6 @@ export class UserComponent implements OnInit{
   profileForm: FormGroup;
 
   constructor(
-    public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
     private location : Location,
@@ -43,7 +41,7 @@ export class UserComponent implements OnInit{
   }
 
   save(value){
-    this.userService.updateCurrentUser(value)
+    this.authService.updateCurrentUser(value)
     .then(res => {
       console.log(res);
     }, err => console.log(err))

@@ -1,4 +1,4 @@
-import { Directive, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, OnInit, ElementRef, Input  } from '@angular/core';
 import { MessageService } from 'src/app/services/message.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 
 
 export class ReCaptchaDirective implements OnInit {
+    @Input() for : string;
     config  :  {};
     bodyEl:Object;
     widgetId : number;
@@ -22,7 +23,7 @@ constructor( private messageService:MessageService, private element : ElementRef
     this.subscription = this.messageService.getMessage().subscribe(message => {
         switch(message.type) {
           case this.messageService.USER_LOGGED_OUT : {grecaptcha.reset(); break};
-          
+          case this.messageService.LOGIN_HIDE : {grecaptcha.reset(); break};
         }
       })
 }
@@ -60,7 +61,7 @@ constructor( private messageService:MessageService, private element : ElementRef
         this.http.get(environment.serverURL + '/checkRecaptcha?response='+response).subscribe(( result ) => {
             console.log(result)
             if (result && result['result'] === 'ok') {
-                this.messageService.sendMessage({type:this.messageService.RECAPTCHA_SUCCESS})
+                this.messageService.sendMessage({type:this.messageService.RECAPTCHA_SUCCESS,for:this.for})
             } else {
                 this.onExpired()
             }

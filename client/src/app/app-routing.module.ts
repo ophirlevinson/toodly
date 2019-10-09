@@ -5,9 +5,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HomeComponent } from './components/home/home.component';
 import { SuccessComponent } from './components/success/success.component';
 import { StoreComponent } from './components/store/store.component';
-import { LoginComponent } from './components/login/login.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { AboutComponent } from './components/about/about.component';
 import { AuthGuard } from './services/auth.guard';
-import { ProductsComponent } from './components/products/products.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 
 const routes: Routes = [
@@ -21,10 +22,11 @@ const routes: Routes = [
     }*/
   },
   { path: 'success/:invoice', component: SuccessComponent },
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent },
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'projects/:project', component: ProjectsComponent },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent },
-
- 
 ];
 
 @NgModule({
