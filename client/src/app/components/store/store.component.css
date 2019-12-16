@@ -1,0 +1,32 @@
+.card {
+    max-width:15rem;
+    margin:auto;
+    padding:10px;
+    background-color:#f8f8f8ff;
+    
+}
+
+.card:hover {
+    background-color:#f8f8eeff;
+}
+
+.addCartBn:hover{
+    background-color:#f8f8ffff;
+    
+}
+
+.product_tags{
+    margin: 10px;
+    cursor: pointer;
+}
+
+.product_tags span {
+    background-color:#f8f8f8ff;
+    padding :10px;
+}
+.product_tags span:hover {
+    background-color:#f8f8eeff;
+}
+.product_tags span.tag-pill {
+    background-color:#f8f8eeff;
+}
