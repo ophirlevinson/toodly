@@ -6,13 +6,13 @@ export const environment = {
   production: false,
   serverURL: "http://localhost:5001/toodlyco/us-central1/api",
   firebase: {
-    apiKey: "AIzaSyBRR2eqsaCIuEkIcDQkJca1iKva_Y8jrec",
-    authDomain: "toodlyco.firebaseapp.com",
-    databaseURL: "https://toodlyco.firebaseio.com",
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
     projectId: "toodlyco",
-    storageBucket: "toodlyco.appspot.com",
-    messagingSenderId: "176360449015",
-    appId: "1:176360449015:web:98c1c332d2263ce6f784f2"
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
   }
 };
 
