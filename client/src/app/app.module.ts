@@ -24,6 +24,7 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AboutComponent } from './components/about/about.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { WavingComponent } from './components/waving/waving.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
     AboutComponent,
     ProjectsComponent,
     OrdersComponent,
+    WavingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,84 @@
-<div class="uk-section uk-padding-remove">
+
     <div class="uk-flex uk-flex-center uk-flex-middle " uk-height-viewport="offset-bottom: footer; offset-top: true; ">
         <div class="uk-animation-slide-bottom uk-text-center ">
-             <img  data-src="assets/images/logo_try1.svg"  alt="toodly - game to inspire logo" uk-img> 
-            <h1 class="uk-margin-remove-top">טודלי - משחקים עם השראה</h1>
-            <p class="uk-margin-remove-top">חוויות ותכנים פורצי דרך בעולם החינוך</p>
-            <a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button" uk-icon="facebook"></a>      
+            
+            <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slideshow="animation: push">
+             
+                <waving-toodly class="uk-visible@l "></waving-toodly>
+                <ul class="uk-slideshow-items borderrad">
+                    <li class="borderrad">
+                        <img src="assets/images/shaar1.jpg" alt="" uk-contain>
+                        <div style="padding:10px 10px" class="uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                       
+                            <h2 style="color:white;" class="fsize_header uk-margin-remove">טודלי - משחקים עם השראה</h2>
+                            <p style="color:white;" class="fsize_text uk-margin-remove">חוויות ותכנים פורצי דרך בעולם החינוך</p>
+                        </div>
+                    </li>
+                    <li class="borderrad">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b" alt="" uk-cover>
+                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
+                            <h2 class="uk-margin-remove">קישרונים</h2>
+                            <p class="uk-margin-remove">סדרת משחקים להעברת מסרים בין הורים לילדים</p>
+                        </div>
+                    </li>
+                    <li class="borderrad">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b" alt="" uk-cover>
+                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
+                            <h3 class="uk-margin-remove">Overlay Bottom11</h3>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
+                    <li class="borderrad">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b" alt="" uk-cover>
+                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
+                            <h3 class="uk-margin-remove">Overlay Bottom Right</h3>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </li>
+                </ul>
+            
+                <div class="uk-light">
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="next"></a>
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="previous"></a>
+                </div>
+            
+            </div>
+            <!--<img  data-src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b"  alt="toodly - game to inspire logo" uk-img> -->
+            <!--<img  data-src="assets/images/logo_try1.svg"  alt="toodly - game to inspire logo" uk-img> 
+            <h2 class="uk-margin-remove-top">טודלי - משחקים עם השראה</h2>
+            <p style="width:70%" class="uk-margin-remove-top">חוויות ותכנים פורצי דרך בעולם החינוך</p>-->
+            <p class="uk-text-right " >בטודלי אנחנו מאמינים בשינוי חינוכי דרך הקשבה, גיוון, משחק, והנאה. אנחנו מכירים את האתגרים הרבים העומדים בפני המחנכים היום ושמחים ליצור עבורם פתרונות. אנחנו פועלים למען עידוד הסקרנות הן של הילדים והן של המחנכים בהיכרות עם העולם ועם עצמם. נשמח להכיר גם אתכם. 
+            </p>
+            <div style="width:100%" class="uk-flex uk-flex-center uk-flex ">
+               
+               
+                <div class="homeicons"  (click)="this.router.navigateByUrl('/store');">
+                    <img  src="assets/images/icon_shop.png" alt="" >
+                    <div >חנות</div>
+                </div>
+               
+                <div class="homeicons"  (click)="this.router.navigateByUrl('/about');">
+                   
+                    <img  src="assets/images/icon_about.png" alt="" >
+                    <div >אודות</div>
+                    
+                </div>
+                <div class="homeicons"   (click)="this.router.navigateByUrl('/projects');">
+                    <img  src="assets/images/icon_projects.png" alt="" >
+                    <div >פרוייקטים</div>
+                   
+                </div>
+                    
+                   
+                    
+               
+                
+               
+                
+            </div>
+           
+            
+            <!--<a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button" uk-icon="facebook"></a> -->     
         </div>  
         <div>
     </div> 

@@ -26,7 +26,7 @@
                         <li><a routerLink="/" routerLinkActive="active">בית</a></li> 
                         <li><a routerLink="/store" routerLinkActive="active">חנות</a></li> 
                         <li><a routerLink="/projects" routerLinkActive="active">פרוייקטים</a></li> 
-                        <li><a routerLink="/about" routerLinkActive="active">עלינו</a></li> 
+                        <li><a routerLink="/about" routerLinkActive="active">אודות</a></li> 
                         <li *ngIf="user"  ><a routerLink="/orders" routerLinkActive="active">הזמנות</a></li> 
                         <li id="main-shopping-cart" class="shopping-cart" *ngIf="getQuantity() > 0">
                             <a uk-toggle="" href="#cart"><span uk-icon="icon: cart; ratio: 3"><span style="color:#333; position:relative;left:-1.8rem">{{getQuantity()}}</span></span>
@@ -50,8 +50,10 @@
         
         
     </div>
-    <div  style="height:1rem;width:100%;position:fixed;z-index:1000;top:4.05rem; background-image:url('assets/images/bg-edge.svg') ; background-repeat: repeat-x;"></div>
+    <!--<div  style="height:1rem;width:100%;position:fixed;z-index:1000;top:4.05rem; background-image:url('assets/images/bg-edge.svg') ; background-repeat: repeat-x;"></div>-->
+    <div  style="width:100%;position:fixed;border-bottom: 1px solid #e4e4e4"></div>
     
+   
 
     <!-- Side Menu-->
     <div id="offcanvas-nav-primary"  uk-offcanvas="overlay: true; flip: true">

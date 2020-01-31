@@ -1,0 +1,21 @@
+<div style="
+position: relative;
+right: -62.5%;
+
+top: 180px;">
+    <img src="assets/images/toodly_waving.png" alt="" uk-cover>
+    <div *ngIf="blink" style="    
+    position: relative;
+    top: -40px;
+    left: -1.8%;">
+        <img src="assets/images/toodly_waving_eyes.png" alt="" uk-cover>
+    </div>
+    <div *ngIf="true" style="    
+    position: relative;
+    top: 53px;
+    
+    left: -48px;">
+        <img style="z-index:-1;transform-origin:top left" [ngStyle]="{'transform' : 'rotate('+ hand_rotation +'deg)'}" src="assets/images/toodly_waving_hands.png" alt="" uk-cover>
+       
+    </div>
+</div>

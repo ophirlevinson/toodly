@@ -1,0 +1,38 @@
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 1026px) {
+    .fsize_text {
+      font-size: 1.2rem;
+    }
+    .fsize_header {
+        font-size: 1.5rem;
+      }
+  }
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 1025px) {
+    .fsize_text {
+        font-size: 0.8rem;
+      }
+      .fsize_header {
+          font-size: 1rem;
+        }
+  }
+
+  .homeicons {
+    margin:0rem 0.5rem 0rem 0.5rem;
+    height: 60px;
+    
+    padding: 0.3rem 1rem; 
+    border-radius: 15px;
+    background-color:white;
+    border:1px solid white;
+    cursor:pointer;
+  }
+
+  .homeicons:hover {
+      border:1px solid #a0a0a0ff;
+  }
+
+  .homeicons img {
+      height:40px;
+  }

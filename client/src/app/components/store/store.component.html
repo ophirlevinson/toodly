@@ -12,27 +12,25 @@
           
             <!-- TAGS-->   
 
-            <div style="margin:5px 0px;" class="margin-top-small uk-flex uk-flex-center">
+            <div style="margin:5px 0px;" class="noselect margin-top-small uk-flex uk-flex-center">
                 <div class="product_tags" *ngFor="let tag of tags; index as i;" (click)="onFilterByTag(tag)"  ><span class="uk-badge" [ngClass]="{'tag-pill': i==tagIndex}">{{tag}}</span></div>
             </div>
             <!-- PRODUCTS -->
             <div  style="direction:rtl" class="uk-grid-small uk-child-width-expand@s uk-grid-small uk-text-center" uk-grid >
                 <div *ngFor="let product of filteredProducts; index as i;" class=" uk-width-1-3@m">
                    
-                    <div class="card">  
+                    <div class="card borderrad noselect ">  
                         <div (click)="onProductMoreInfo(i)" style="cursor:pointer">
                         
                             <h4  style="margin:auto ; margin-bottom:8px" >{{product.name}}</h4>  
-                            <div style="margin:0px; border: 2px solid #d9d9d9; ">
-                                <img  data-src="{{product.imgURLs[0]}}" uk-img >   
+                            <div class="borderrad" style="margin:0px;  ">
+                                <img class="borderrad" data-src="{{product.imgURLs[0]}}" uk-img >   
                             </div>
                             
-                            <div style="margin:5px 0px;" class="margin-top-small uk-flex uk-flex-between">
+                            <div style="margin:5px 0px;" class="uk-hidden@m margin-top-small uk-flex uk-flex-between">
                                 <div style=" border: 2px solid #d9d9d9;"><img style="max-width: 83px;" data-src="{{product.imgURLs[1]}}" uk-img ></div>
                                 <div style=" border: 2px solid #d9d9d9;"><img style="max-width: 83px;" data-src="{{product.imgURLs[2]}}" uk-img ></div>
                                 <div style=" border: 2px solid #d9d9d9;"><img style="max-width: 83px;" data-src="{{product.imgURLs[3]}}" uk-img ></div>
-                            
-                                
                             </div>
                             <div  [innerHtml]="product.description" style="text-align:right;font-size:.8rem;height:5rem;resize: horizontal; overflow: hidden; text-overflow: ellipsis;">
                             
@@ -47,7 +45,7 @@
                             position: relative;
                             top:-8px;">ליחצו למידע נוסף...</p>
                         </div>
-                        <button uk-toggle="target: #main-shopping-cart; animation: uk-animation-slide-top-small; cls: uk" style="border-color: rgba(19, 19, 19, 0.7);" class="uk-text-right uk-button uk-button-default uk-button-small addCartBn" (click)='addCart(product.name)' >הוספה לעגלה - מחיר &#8362;{{product.price}}</button>
+                        <button uk-toggle="target: #main-shopping-cart; animation: uk-animation-slide-top-small; cls: uk" style="border-color: rgba(19, 19, 19, 0.7);" class="uk-text-right uk-button uk-button-default uk-button-small addCartBn" (click)='addCart(product.name)' >הוספה לסל - מחיר &#8362;{{product.price}}</button>
                     
                     </div>
                 </div>
@@ -59,40 +57,45 @@
     </div>
 
     <!-- PRODUCT DIALOG-->
-    <div  id="modal-product" class="uk-modal-full" uk-modal>
-            <div class="uk-modal-dialog"  [ngStyle]="{'cursor':'pointer','background-color': '#f8f8eeff'}" >
-                    <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-                    <div class="uk-grid-collapse uk-child-width-1-1@s uk-child-width-1-2@m uk-flex-middle" uk-grid>
-                            <div class="uk-padding-large" (click)="onHide()">
-                            
-                                    <h1 style="margin:0px" class="uk-animation-slide-bottom"> {{product['name']}}</h1>
-                                    <div style="margin: 10px 0px;" class="margin-top-small uk-flex uk-flex-left">
-                                        <div style="margin: 0px;" class="product_tags" *ngFor="let tag of product['tags_array']; index as i;"><span class="uk-badge">{{tag}}</span></div>
-                                    </div>
-                                    <!--<div uk-flex>
-                                        <h3 [ngStyle]="{'color': textcolor }" class="uk-animation-slide-left">{{product?.tags}}</h3>
-                                    </div>-->
-                                    
-                                    <div class="uk-animation-slide-right"  [innerHtml]="product['description']"></div>
-                                    <button uk-toggle="target: #main-shopping-cart; animation: uk-animation-slide-top-small; cls: uk" style="border-color: rgba(19, 19, 19, 0.7);" class="uk-margin-small-top uk-text-right uk-button uk-button-default uk-button-small addCartBn" (click)='addCart(product["name"])' >הוספה לעגלה - מחיר &#8362;{{product['price']}}</button>
-                    
-                            
+
+    
+
+    <div *ngIf="displayShop" id="modal-product"  uk-modal >
+        <div class="uk-modal-dialog uk-modal-body uk-overflow-auto"  [ngStyle]="{'cursor':'pointer','background-color': '#ffffffff'}" >
+                <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                <div uk-slideshow="animation: fade; autoplay: true; pause-on-hover:false; autoplay-interval:4000" >
+                    <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
+                            <ul class="uk-slideshow-items" >
+                                    <li *ngFor="let image of product['imgURLs']; index as i;"  >
+                                        
+                                        <img  data-src="{{image}}" uk-img >   
+                                       
+                                           
+                                    </li>
+                            </ul>
+                            <a style="color:white" class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                            <a style="color:white"  class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
                     </div>
-                    <div uk-slideshow="animation: fade; autoplay: true; pause-on-hover:false; autoplay-interval:4000" >
-                            <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
-                                    <ul class="uk-slideshow-items" uk-height-viewport>
-                                            <li *ngFor="let image of product['imgURLs']; index as i;"  >
-                                                    <div class="uk-background-cover" [ngStyle]="{'background-image': 'url('+ (image ? image : '') +')','background-size': ( image === 'https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fprojects%2F4%2F1.jpg?alt=media&token=16ee0f8e-1c7b-4c93-beb1-e16761477abc' ? 'contain' : 'cover')}" uk-height-viewport ></div>
-                                            </li>
-                                    </ul>
-                                    <a style="color:white" class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                                    <a style="color:white"  class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-                            </div>
-                    </div>
-                    
-                    </div>
-            </div>
-    </div>
+             </div>
+                <div (click)="onHide()">
+                        
+                                <h2 style="margin:0px" class="uk-animation-slide-bottom"> {{product['name']}}</h2>
+                                <div  class="margin-top-small uk-flex uk-flex-left">
+                                    <div style="margin: 0px;" class="product_tags" *ngFor="let tag of product['tags_array']; index as i;"><span class="uk-badge">{{tag}}</span></div>
+                                </div>
+                                
+                                
+                                <div class="uk-animation-slide-right"  [innerHtml]="product['description']"></div>
+                                <button uk-toggle="target: #main-shopping-cart; animation: uk-animation-slide-top-small; cls: uk" style="border-color: rgba(19, 19, 19, 0.7);" class="uk-margin-small-top uk-text-right uk-button uk-button-default uk-button-small addCartBn" (click)='addCart(product["name"])' >הוספה לעגלה - מחיר &#8362;{{product['price']}}</button>
+                
+                        
+                </div>
+                
+                
+               
+        </div>
+</div>
+    
     
     
 

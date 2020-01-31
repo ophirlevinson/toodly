@@ -38,7 +38,7 @@ export class AppComponent {
       UIkit.offcanvas('#offcanvas-nav-primary').hide() 
     })
     this.bodyEl = this.el.nativeElement.closest('body');
-    this.startTimer()
+    // this.startTimer()
     
     // subscribe to messageService messages
     this.subscription = this.messageService.getMessage().subscribe(message => {
@@ -147,6 +147,7 @@ export class AppComponent {
   }
 
   startTimer() {
+ 
     this.interval = setInterval(() => {  
       if(this.timeLeft > 0) {
         this.timeLeft--;

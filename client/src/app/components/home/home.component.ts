@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private messageService: MessageService) { }
+  constructor(private route: ActivatedRoute,private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
