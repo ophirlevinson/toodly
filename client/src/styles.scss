@@ -7,16 +7,20 @@
 
 
 // 1. Your custom variables and variable overwrites.
-$global-background: #eae7dc;
+// $global-background: #eae7dc;
+$global-background: #ffffff;
 $global-inverse-color : #ffffff;
+//$global-primary-background:#8e8d8a;
 $global-primary-background:#8e8d8a;
-$global-secondary-background:#eae7dc;
+$global-secondary-background:#242322;
 $global-muted-color:#8e8d8a;
 $global-color: #131313;
 $global-inverse-color: #131313;
 $table-divider-border: #8e8d8a;
 $notification-position: 4rem;
 $global-border : #131313;
+// Overlay
+$overlay-caption-background: #131313;
 
 
 $offcanvas-bar-background: $global-background;
@@ -53,3 +57,7 @@ $global-font-size : 18px;
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Opera and Firefox */
   }
+
+.borderrad {
+  border-radius: 10px;
+}
