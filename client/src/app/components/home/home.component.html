@@ -15,7 +15,7 @@
                     </li>
                     <li class="borderrad">
                         <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fshaar2.jpg?alt=media&token=98ea43a8-f60f-479f-94d5-dc52b84fd51f" alt="" uk-cover>
-                        <div (click)="this.router.navigateByUrl('/store');" style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                        <div (click)="routeTo('/store');" style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
                             <h2 style="color:white;" class="fsize_header uk-margin-remove">קישרונים</h2>
                             <p style="color:white;" class="fsize_text uk-margin-remove">סדרת משחקים לחיזוק הקשר בין הורים וילדים</p>
                         </div>
@@ -29,7 +29,7 @@
                     </li>
                     <li class="borderrad">
                         <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fshaar4.jpg?alt=media&token=3d55c5a9-7b8d-45a2-9141-fd206ddcbb48" alt="" uk-cover>
-                        <div (click)="this.router.navigateByUrl('/store');" style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                        <div (click)="routeTo('/store');" style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
                             <h2 style="color:white;" class="fsize_header uk-margin-remove">יוגה לילדים</h2>
                             <p style="color:white;" class="fsize_text uk-margin-remove">סדרת קלפי יוגה למשחק של מבוגרים וילדים</p>
                         </div>
@@ -58,18 +58,18 @@
             <div style="width:100%" class="uk-flex uk-flex-center uk-flex ">
                
                
-                <div class="homeicons"  (click)="this.router.navigateByUrl('/store');">
+                <div class="homeicons"  (click)="routeTo('/store');">
                     <img  src="assets/images/icon_shop.png" alt="" >
                     <div >חנות</div>
                 </div>
                
-                <div class="homeicons"  (click)="this.router.navigateByUrl('/about');">
+                <div class="homeicons"  (click)="routeTo('/about');">
                    
                     <img  src="assets/images/icon_about.png" alt="" >
                     <div >אודות</div>
                     
                 </div>
-                <div class="homeicons"   (click)="this.router.navigateByUrl('/projects');">
+                <div class="homeicons"   (click)="routeTo('/projects');">
                     <img  src="assets/images/icon_projects.png" alt="" >
                     <div >פרוייקטים</div>
                    

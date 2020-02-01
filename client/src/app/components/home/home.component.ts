@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  routeTo(routeTo) {
+    this.router.navigateByUrl(routeTo);
+  }
+
 }
