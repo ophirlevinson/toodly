@@ -23,12 +23,20 @@ export class ProjectsComponent implements OnInit {
       this.startProject = params.get("project") ? parseInt( params.get("project") ) : -1;
       
     })
+    if (localStorage.getItem('projects')) {
+      this.projects = JSON.parse(localStorage.getItem('projects'));
+      if (this.startProject != -1) {  
+        this.onProject(this.startProject)
+      }
+    } else {
 
+    
     this.purchaseService.getProjects()
       .subscribe(( projects ) => {
         
         if (projects && projects['result'] == 'ok'){
-          this.projects = projects['data']
+          this.projects = projects['data'];
+          localStorage.setItem('projects', JSON.stringify(this.projects));
           if (this.startProject != -1) {  
            
             this.onProject(this.startProject)
@@ -36,7 +44,8 @@ export class ProjectsComponent implements OnInit {
         }  else {
           console.log('Projects not found')
         }  
-    });
+      });
+    }
   }
 
   onProject(index) {

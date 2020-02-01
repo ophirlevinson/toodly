@@ -1,14 +1,16 @@
-<div style="min-height:105vh !important; overflow:hidden"  class="uk-section uk-padding-remove" >
+<!--<div style="min-height:100vh !important; overflow:hidden"  class="uk-section uk-padding-remove" >-->
+<div class="uk-section uk-padding-remove" >
       
     <!-- SPINNNER -->
-    <div *ngIf="!displayShop"  class="uk-animation-slide-bottom uk-text-center  "  uk-height-viewport="offset-bottom: footer; offset-top: true; ">
-            <img class="uk-margin-auto" data-src="assets/images/pirate.png" style="position:relative;top:180px" width="100" alt="טודלי - משחקים עם השראה" uk-img> 
-            <div><span  uk-spinner="ratio: 6.5"></span></div>   
+    <div *ngIf="!displayShop" class="uk-animation-slide-bottom "  >
+        <div class="uk-flex uk-flex-center uk-flex-middle" uk-height-viewport="expand:true;  ">
+           <img style="-webkit-animation: rotation 2s infinite ease-in-out;"  class="" data-src="assets/images/gem.png"   alt="טודלי - משחקים עם השראה" uk-img> 
+        </div > 
     </div>
    
     
     <!-- STORE ITEMS -->
-    <div *ngIf="displayShop" style="margin-top:20px" uk-height-viewport="expand: true; " class="uk-animation-slide-bottom">
+    <div *ngIf="displayShop" style="margin-top:20px" uk-height-viewport="expand: true; " class="uk-animation-fade">
           
             <!-- TAGS-->   
 
@@ -16,10 +18,18 @@
                 <div class="product_tags" *ngFor="let tag of tags; index as i;" (click)="onFilterByTag(tag)"  ><span class="uk-badge" [ngClass]="{'tag-pill': i==tagIndex}">{{tag}}</span></div>
             </div>
             <!-- PRODUCTS -->
-            <div  style="direction:rtl" class="uk-grid-small uk-child-width-expand@s uk-grid-small uk-text-center" uk-grid >
+            <div class="uk-visible@l" style="position:absolute; top:50%; left:-5px">
+                <img class="note1" src="assets/images/note1.png" alt="" uk-contain>
+                <img class="note2" src="assets/images/note2.png" alt="" uk-contain>
+                <img  src="assets/images/birds.png" alt="" uk-contain>
+            </div>
+            
+            <div [@listAnimation]="filteredProducts.length" style="direction:rtl" class="uk-grid-small uk-child-width-expand@s uk-grid-small uk-text-center" uk-grid >
+                
                 <div *ngFor="let product of filteredProducts; index as i;" class=" uk-width-1-3@m">
                    
                     <div class="card borderrad noselect ">  
+                        
                         <div (click)="onProductMoreInfo(i)" style="cursor:pointer">
                         
                             <h4  style="margin:auto ; margin-bottom:8px" >{{product.name}}</h4>  
@@ -63,12 +73,12 @@
     <div *ngIf="displayShop" id="modal-product"  uk-modal >
         <div class="uk-modal-dialog uk-modal-body uk-overflow-auto"  [ngStyle]="{'cursor':'pointer','background-color': '#ffffffff'}" >
                 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-                <div uk-slideshow="animation: fade; autoplay: true; pause-on-hover:false; autoplay-interval:4000" >
-                    <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
-                            <ul class="uk-slideshow-items" >
-                                    <li *ngFor="let image of product['imgURLs']; index as i;"  >
+                <div style="filter:drop-shadow(2px 2px 12px #45454560);"  uk-slideshow="animation: fade; autoplay: true; pause-on-hover:false; autoplay-interval:4000" >
+                    <div class=" uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
+                            <ul  class="uk-slideshow-items" >
+                                    <li class="borderrad" *ngFor="let image of product['imgURLs']; index as i;"  >
                                         
-                                        <img  data-src="{{image}}" uk-img >   
+                                        <img class="borderrad"  data-src="{{image}}" uk-img >   
                                        
                                            
                                     </li>

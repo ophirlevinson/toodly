@@ -24,8 +24,8 @@
     
     padding: 0.3rem 1rem; 
     border-radius: 15px;
-    background-color:white;
-    border:1px solid white;
+    background-color:#ffffff00;
+    border:1px solid #ffffff00;
     cursor:pointer;
   }
 
@@ -35,4 +35,8 @@
 
   .homeicons img {
       height:40px;
+  }
+
+  .homeoverlay{
+    cursor : pointer;
   }

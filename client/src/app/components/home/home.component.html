@@ -1,43 +1,49 @@
 
     <div class="uk-flex uk-flex-center uk-flex-middle " uk-height-viewport="offset-bottom: footer; offset-top: true; ">
-        <div class="uk-animation-slide-bottom uk-text-center ">
+        <div class="uk-animation-fade uk-text-center ">
             
-            <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slideshow="animation: push">
+            <div style="filter:drop-shadow(8px 8px 14px #00000080);" uk-slideshow class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slideshow="animation: push;autoplay: true;autoplay-interval:4300;pause-on-hover:false">
              
                 <waving-toodly class="uk-visible@l "></waving-toodly>
-                <ul class="uk-slideshow-items borderrad">
+                <ul class="homeitems noselect uk-slideshow-items borderrad">
                     <li class="borderrad">
                         <img src="assets/images/shaar1.jpg" alt="" uk-contain>
-                        <div style="padding:10px 10px" class="uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
-                       
+                        <div style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
                             <h2 style="color:white;" class="fsize_header uk-margin-remove">טודלי - משחקים עם השראה</h2>
                             <p style="color:white;" class="fsize_text uk-margin-remove">חוויות ותכנים פורצי דרך בעולם החינוך</p>
                         </div>
                     </li>
                     <li class="borderrad">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b" alt="" uk-cover>
-                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
-                            <h2 class="uk-margin-remove">קישרונים</h2>
-                            <p class="uk-margin-remove">סדרת משחקים להעברת מסרים בין הורים לילדים</p>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fshaar2.jpg?alt=media&token=98ea43a8-f60f-479f-94d5-dc52b84fd51f" alt="" uk-cover>
+                        <div (click)="this.router.navigateByUrl('/store');" style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                            <h2 style="color:white;" class="fsize_header uk-margin-remove">קישרונים</h2>
+                            <p style="color:white;" class="fsize_text uk-margin-remove">סדרת משחקים לחיזוק הקשר בין הורים וילדים</p>
                         </div>
                     </li>
                     <li class="borderrad">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b" alt="" uk-cover>
-                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
-                            <h3 class="uk-margin-remove">Overlay Bottom11</h3>
-                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fshaar3.jpg?alt=media&token=52695ea8-7079-4817-9c4a-b6cb1d748e7f" alt="" uk-cover>
+                        <div style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                            <h2 style="color:white;" class="fsize_header uk-margin-remove">הדרכה וליווי</h2>
+                            <p style="color:white;" class="fsize_text uk-margin-remove">סדנאות והשתלמויות חדשנות בחינוך</p>
                         </div>
                     </li>
                     <li class="borderrad">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/cards%2Fimages%2F5.png?alt=media&token=23357df7-c76e-492e-8a15-89a9e2e4187b" alt="" uk-cover>
-                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
-                            <h3 class="uk-margin-remove">Overlay Bottom Right</h3>
-                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet.</p>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fshaar4.jpg?alt=media&token=3d55c5a9-7b8d-45a2-9141-fd206ddcbb48" alt="" uk-cover>
+                        <div (click)="this.router.navigateByUrl('/store');" style="padding:10px 10px" class="homeoverlay uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                            <h2 style="color:white;" class="fsize_header uk-margin-remove">יוגה לילדים</h2>
+                            <p style="color:white;" class="fsize_text uk-margin-remove">סדרת קלפי יוגה למשחק של מבוגרים וילדים</p>
+                        </div>
+                    </li>
+                    <li class="borderrad">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/toodlyco.appspot.com/o/web%2Fshaar5.jpg?alt=media&token=93f268f2-f2c7-49f0-9829-41572bc98ec6" alt="" uk-cover>
+                        <div style="padding:10px 10px" class="uk-overlay  uk-overlay-primary uk-position-bottom uk-text-center uk-dark">
+                            <h2 style="color:white;" class="fsize_header uk-margin-remove">איך נרגעים</h2>
+                            <p style="color:white;" class="fsize_text uk-margin-remove">כרטיסיות ייחודיות להעצמת הילדים ברגעי קושי</p>
                         </div>
                     </li>
                 </ul>
             
-                <div class="uk-light">
+                <div class="uk-dark">
                     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="next"></a>
                     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="previous"></a>
                 </div>
@@ -80,6 +86,7 @@
             
             <!--<a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button" uk-icon="facebook"></a> -->     
         </div>  
+        
         <div>
     </div> 
 </div>

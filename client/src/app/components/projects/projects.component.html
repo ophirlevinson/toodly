@@ -1,11 +1,15 @@
-<div *ngIf="projects?.length <= 0" class="uk-text-center uk-flex uk-flex-center uk-flex-middle " uk-height-viewport="offset-bottom: footer; offset-top: true; " >
-                
-        <span class="uk-margin-large-top"  uk-spinner="ratio: 4.5"></span>
-</div>
-<div *ngIf="projects?.length > 0" uk-height-viewport="expand: true; " class="uk-animation-slide-bottom">
+
+<!-- SPINNNER -->
+
+<div *ngIf="projects?.length == 0" class="uk-animation-slide-bottom "  >
+        <div class="uk-flex uk-flex-center uk-flex-middle" uk-height-viewport="expand:true;  ">
+           <img style="-webkit-animation: rotation 2s infinite ease-in-out;"  class="" data-src="assets/images/gem.png"   alt="טודלי - משחקים עם השראה" uk-img> 
+        </div > 
+    </div>
+<div *ngIf="projects?.length > 0" uk-height-viewport="expand: true; " class="uk-animation-fade">
         <div  style="direction:rtl" class="uk-grid-small uk-child-width-expand@s uk-text-center" uk-grid >
                 <div *ngFor="let project of projects; index as i;" class=" uk-width-1-3@m">
-                        <div  class="card"> <a [ngStyle]="{'background': 'url('+project.bg+')'}"  (click)="onProject(i)" title="{{project.name}}" ></a></div>
+                        <div style="filter: drop-shadow(8px 8px 20px #00000066);" class="card"> <a [ngStyle]="{'background': 'url('+project.bg+')'}"  (click)="onProject(i)" title="{{project.name}}" ></a></div>
                 </div>     
         </div>
 </div>

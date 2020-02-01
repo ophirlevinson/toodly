@@ -66,7 +66,7 @@
                 <li class=""><a routerLink="/" routerLinkActive="active">בית</a></li> 
                 <li class=""><a routerLink="/store" routerLinkActive="active">חנות</a></li> 
                 <li class=""><a routerLink="/projects" routerLinkActive="active">פרוייקטים</a></li> 
-                <li class=""><a routerLink="/about" routerLinkActive="active">עלינו</a></li>
+                <li class=""><a routerLink="/about" routerLinkActive="active">אודות</a></li>
                 <li *ngIf="user"  ><a routerLink="/orders" routerLinkActive="active">הזמנות</a></li>  
                 <li><a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button;ratio:1" uk-icon="facebook"></a></li> 
             </ul>
@@ -129,7 +129,9 @@
     <div  class="uk-container uk-container-small uf uk-margin-remove-top" >
         <router-outlet ></router-outlet>
     </div>
-
+    <footer class="uk-text-center uk-text-small">
+        <span>טודלי משחקים עם השראה  - כל הזכויות שמורות 2020©</span>
+    </footer>>
    
 </div>
 

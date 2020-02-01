@@ -3,6 +3,8 @@
     max-width:15rem;
     margin:auto;
     padding:10px;
+    background-color:white;
+    filter:drop-shadow(0px 8px 6px #00000080);
     
     
 }
@@ -35,3 +37,46 @@
 .product_tags span.tag-pill {
     background-color:#f8f8eeff;
 }
+
+.note1 {
+    position:relative;
+    left:-70%; 
+    top:-110px;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    opacity:0;
+}
+
+.note2 {
+    position:relative; 
+    left:-50%; 
+    top:-120px;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+    animation-timing-function: linear;
+
+    opacity:0;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {opacity:0; transform: rotate(10deg),translate(0px, 0px);}
+   
+    80%   {opacity:1; transform: rotate(10deg),translate(0px, -90px);}
+    100%   {opacity:0; transform: translate(10px, -100px);}
+   
+  }
+  
+  /* Standard syntax */
+  @keyframes example {
+    0%   {opacity:0; transform: rotate(0deg) translate(0px, 0px);}
+    50%   {opacity:1; transform: rotate(20deg) translate(0px, -90px);}
+    100%   {opacity:0; transform: rotate(0deg) translate(10px, -100px);}
+  }

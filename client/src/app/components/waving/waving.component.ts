@@ -14,7 +14,7 @@ export class WavingComponent implements OnInit {
   blink:boolean = true;
   hand_rotation: number = 0;
   constructor() { 
-    console.log('ondof');
+    
   }
 
   ngOnInit() {
@@ -31,12 +31,24 @@ export class WavingComponent implements OnInit {
         this.wavetimeLeft--;
       } else {
         this.wavetimeLeft = Math.floor(Math.random() * 10);;  //seconds between waves
-        this.hand_rotation = 15;  
+        this.hand_rotation = 25;  
         
         setTimeout( () => {
           this.hand_rotation = 0; 
-        
-        },200)  //time of wave
+          setTimeout( () => {
+            this.hand_rotation = 25; 
+            setTimeout( () => {
+              this.hand_rotation = 0; 
+              setTimeout( () => {
+                this.hand_rotation = 25; 
+                setTimeout( () => {
+                  this.hand_rotation = 0; 
+                
+                },100) 
+              },100) 
+            },100)  //time of wave
+          },100)  //time of wave
+        },100)  //time of wave
       }
     },1000)
 

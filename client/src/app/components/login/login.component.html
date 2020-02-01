@@ -12,7 +12,7 @@
           <label class="error">{{errorMessage}}</label>
         </div>
         <app-recaptcha  *ngIf="!inLoginMode" key="public key"></app-recaptcha>
-        <button [disabled]="disableForm && !inLoginMode" class="uk-text-center" style="border:1px solid black" type="submit" (click)="tryLoginOrRegister(loginForm.value)" class="uk-button uk-button-secondary uk-margin-small-top uk-margin-small-bottom">{{inLoginMode ? 'כניסה' : 'הירשם'}}</button>
+        <button [disabled]="disableForm && !inLoginMode" class="uk-text-center" style="border:1px solid black" type="submit" (click)="tryLoginOrRegister(loginForm.value)" class="uk-button uk-button-primary uk-margin-small-top uk-margin-small-bottom">{{inLoginMode ? 'כניסה' : 'הירשם'}}</button>
       </form>
     </div>
   </div>

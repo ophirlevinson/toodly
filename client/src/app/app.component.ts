@@ -81,6 +81,7 @@ export class AppComponent {
       this.inLoginMode = true;
       this.messageService.sendMessage({type:this.messageService.LOGIN_HIDE});
     })
+    this.storage();
   }
 
   addToCart(item) {
@@ -162,4 +163,21 @@ export class AppComponent {
       }
     },1000)
   }
+
+  storage() {
+    let hours = 0.0; // Reset when storage is more than 24hours
+    let now = new Date().getTime();
+    let setupTime = localStorage.getItem('setupTime') ? parseInt(localStorage.getItem('setupTime')) : 0;
+  
+    if (setupTime == null) {
+        localStorage.setItem('setupTime', now.toString())
+    } else {
+        if(now-setupTime > hours*60*60*1000) {
+            console.log('Clearing');
+            localStorage.clear()
+            localStorage.setItem('setupTime', now.toString());
+        }
+    }
+  }
+  
 }
