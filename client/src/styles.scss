@@ -1,17 +1,9 @@
-//pallete 19 - https://visme.co/blog/website-color-schemes/  
-// #eae7dc
-// #d8c3a5
-// #8e8d8a
-// #e98074
-// #e85a4f
-
-
 // 1. Your custom variables and variable overwrites.
 // $global-background: #eae7dc;
-$global-background: #ffffff;
+$global-background: #eae7dc;
 $global-inverse-color : #ffffff;
 //$global-primary-background:#8e8d8a;
-$global-primary-background:#ffffff;
+$global-primary-background:#8e8d8a;
 $global-secondary-background:#242322;
 $global-muted-color:#8e8d8a;
 $global-color: #131313;
@@ -19,9 +11,9 @@ $global-inverse-color: #131313;
 $table-divider-border: #8e8d8a;
 $notification-position: 4rem;
 $global-border : #131313;
+$modal-dialog-background : #eae7dc;
 // Overlay
 $overlay-caption-background: #131313;
-
 
 $offcanvas-bar-background: $global-background;
 
@@ -63,6 +55,15 @@ $global-font-size : 18px;
 }
 
 @-webkit-keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation {
   from {
       -webkit-transform: rotate(0deg);
   }
