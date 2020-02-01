@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
       if (params.get("login") === 'login') {
         this.messageService.sendMessage({type:this.messageService.STARTLOGIN})
       }
+      
  
     })
   }

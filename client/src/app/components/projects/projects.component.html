@@ -9,7 +9,7 @@
 <div *ngIf="projects?.length > 0" uk-height-viewport="expand: true; " class="uk-animation-fade">
         <div  style="direction:rtl" class="uk-grid-small uk-child-width-expand@s uk-text-center" uk-grid >
                 <div *ngFor="let project of projects; index as i;" class=" uk-width-1-3@m">
-                        <div style="filter: drop-shadow(8px 8px 20px #00000066);" class="card"> <a [ngStyle]="{'background': 'url('+project.bg+')'}"  (click)="onProject(i)" title="{{project.name}}" ></a></div>
+                        <div style="filter: drop-shadow(8px 8px 20px #00000066);" class="card"> <a [ngStyle]="{'background': 'url('+project.bg+')'}"  (click)="onProject(i,target)" title="{{project.name}}" ></a></div>
                 </div>     
         </div>
 </div>
@@ -31,9 +31,10 @@
                                 <a style="color:white"  class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
                         </div>
                 </div>
-                <div class="uk-padding-large" (click)="onHide()">
+                <div #target style="width: 0px; height:0px; position: relative;top:-100px"></div>
+                <div   class="uk-padding-large" (click)="onHide()">
                         
-                                <h1 [ngStyle]="{'color': textcolor }"class="uk-animation-slide-bottom"> {{project['name']}}</h1>
+                                <h1  [ngStyle]="{'color': textcolor }"class="uk-animation-slide-bottom"> {{project['name']}}</h1>
                                 <h3 [ngStyle]="{'color': textcolor }" class="uk-animation-slide-left">{{project['headline']}}</h3>
                                 <div [ngStyle]="{'color': textcolor }" class="uk-animation-slide-right"  [innerHtml]="project['desc']"></div>
                         

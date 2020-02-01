@@ -26,7 +26,7 @@ export class ProjectsComponent implements OnInit {
     if (localStorage.getItem('projects')) {
       this.projects = JSON.parse(localStorage.getItem('projects'));
       if (this.startProject != -1) {  
-        this.onProject(this.startProject)
+        this.onProject(this.startProject,null)
       }
     } else {
 
@@ -39,7 +39,7 @@ export class ProjectsComponent implements OnInit {
           localStorage.setItem('projects', JSON.stringify(this.projects));
           if (this.startProject != -1) {  
            
-            this.onProject(this.startProject)
+            this.onProject(this.startProject,null)
           }
         }  else {
           console.log('Projects not found')
@@ -48,12 +48,19 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
-  onProject(index) {
+  onProject(index, el: HTMLElement) {
     
     this.project = this.projects[index];
     this.bgcolor = this.projects[index]['bgcolor'];
     this.textcolor = this.projects[index]['textcolor'];
-    UIkit.modal("#modal-project").show()
+    UIkit.modal("#modal-project").show();
+    UIkit.scroll('#projecttext',{'offset':200});
+    
+    if (el) {
+     
+      setTimeout( () => el.scrollIntoView({behavior:"smooth"}) , 1000);
+      
+    }
     // this.router.navigate(['/projects/'+ index]);
    
   }
