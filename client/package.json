@@ -1,5 +1,5 @@
 {
-  "name": "toodly",
+  "name": "toodly-web",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -15,17 +15,17 @@
     "@angular/common": "~8.2.5",
     "@angular/compiler": "~8.2.5",
     "@angular/core": "~8.2.5",
-    "@angular/fire": "^5.2.1",
     "@angular/forms": "~8.2.5",
     "@angular/platform-browser": "~8.2.5",
     "@angular/platform-browser-dynamic": "~8.2.5",
     "@angular/router": "~8.2.5",
-    "file-saver": "^2.0.2",
-    "firebase": "^7.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "uikit": "^3.2.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "file-saver": "^2.0.2",
+    "firebase": "^7.8.0",
+    "@angular/fire": "^5.3.0",
+    "uikit": "^3.3.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.4",
