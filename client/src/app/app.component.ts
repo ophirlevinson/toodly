@@ -165,7 +165,7 @@ export class AppComponent {
   }
 
   storage() {
-    let hours = 0.0; // Reset when storage is more than 24hours
+    let hours = 0.5; // Reset when storage is more than 24hours
     let now = new Date().getTime();
     let setupTime = localStorage.getItem('setupTime') ? parseInt(localStorage.getItem('setupTime')) : 0;
   
