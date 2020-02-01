@@ -11,7 +11,7 @@
 $global-background: #ffffff;
 $global-inverse-color : #ffffff;
 //$global-primary-background:#8e8d8a;
-$global-primary-background:#8e8d8a;
+$global-primary-background:#ffffff;
 $global-secondary-background:#242322;
 $global-muted-color:#8e8d8a;
 $global-color: #131313;
@@ -60,4 +60,13 @@ $global-font-size : 18px;
 
 .borderrad {
   border-radius: 10px;
+}
+
+@-webkit-keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(359deg);
+  }
 }
