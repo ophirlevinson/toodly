@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
+
+
+
 
 @Component({
   selector: 'app-home',
@@ -8,8 +12,8 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute,private router: Router, private messageService: MessageService) { }
+  
+  constructor(private route: ActivatedRoute,private router: Router, private messageService: MessageService,private analytics: AngularFireAnalytics) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -22,6 +26,8 @@ export class HomeComponent implements OnInit {
   }
 
   routeTo(routeTo) {
+    this.analytics.logEvent('home_main_link_press');
+
     this.router.navigateByUrl(routeTo);
   }
 
