@@ -128,13 +128,14 @@ Get All orders
 app.get("/orders",authenticate, async (req, res) => {
   let orders = []
   try {
-    const  ordersCollection =  firestore.collection('orders');
-    let snapshot = await ordersCollection.get()
+    const  ordersCollection =  firestore.collection('orders').where('paid','==',true);
+    let snapshot = await ordersCollection.get();
     snapshot.forEach(doc => {
       let data = doc.data();
       data.invoice_number = doc.id;
       orders.push(data)
     });
+    
     res.send({result:'ok', data:orders})
   }
   catch (error) {
@@ -182,9 +183,10 @@ Get All store products
 ***************************/
 
 app.get("/products", async (req, res) => {
+  console.log('opgie');
   let products = []
   try {
-    const  productsCollection =  firestore.collection('products');
+    const  productsCollection =  firestore.collection('products').orderBy('order', 'asc');;
     let snapshot = await productsCollection.get()
     snapshot.forEach(doc => {
       products.push(doc.data())
@@ -398,11 +400,63 @@ app.get("/order/details", async (req, res) => {
   // Get invoice parameter
   let invoice_number = req.query.invoice;
   const snapshot = await firestore.doc('orders/'+invoice_number).get()
+  
   const order = snapshot.data()
+  
   if (order && order.paid && order.downloadable) {
-    // get products 
+    
+    var productSnapshots = []
+    order.products.forEach( (product , index ) => {
+      productSnapshots.push(firestore.collection('products').where('name','==',order.products[index].name).get());
+    })
+    // Try getting the file details
+   
+    try{
+      var fileDetails = [];
+      Promise.all(productSnapshots).then (values => {
+        values.forEach ( (value , index) => {
+          var product = value.docs.map(function (documentSnapshot) {
+            return documentSnapshot.data();  
+          });
+          
+          
+          fileDetails.push({fname:product[0].fname, folder:product[0].folder});
+       
+        })
 
-    res.send({result:'ok', data:order})
+         // Try getting the file sizes
+        const bucket = storage.bucket(config().storage.bucketName);
+        var filesRefPromises = [];
+        
+        try {
+          fileDetails.forEach( (file, index) => {
+            var filesRef  = bucket.file('/'+file.folder+'/'+file.fname);
+            
+            filesRefPromises.push(filesRef.getMetadata());
+          })      
+          Promise.all(filesRefPromises).then (values => {    
+            values.forEach ( (metadata , index) => {
+             
+              order.products[index].size = metadata[0].size
+            });
+            res.send({result:'ok', data:{payer: order.payer, products:order.products}});
+          
+          })
+
+        }
+        catch(err) {
+          console.log({error:err})
+          res.send({result:'error', data:'Could not retrieve files size'})
+        }
+      })
+    }
+    catch(err) {
+      console.log({error:err})
+      res.send({result:'error', data:'Could not get file details'})
+    }
+
+   
+  
   } else {
     res.send({result:'error', data:'No details found'})
   }  
@@ -450,12 +504,14 @@ app.get("/order/download", async (req, res) => {
   if ((now - lastDownloadDate) / 86400000 > config().products.daysleft) {
     console.log('download has expired')
     res.send(null)
+    
     return 
   }
 
   // Update order
   order.products[index]['lastdownloadedon'] = now;
   order.products[index].downloadCount = ++downloadCount;
+  
   
   await firestore.doc('orders/'+invoice_number).update({
     products : order.products
@@ -464,12 +520,15 @@ app.get("/order/download", async (req, res) => {
     res.send(null)
     
   })
-
+ 
+  
+ 
   // Find product ID in order to use its name
   const productSnapshot =  await (firestore.collection('products').where('name','==',order.products[index].name)).get()
   var product = productSnapshot.docs.map(function (documentSnapshot) {
     return documentSnapshot.data();
   });
+  
   // console.log(product)
   try {
     const bucket = storage.bucket(config().storage.bucketName)
