@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseService } from 'src/app/services/purchase.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { trigger, transition, style, animate, query, stagger  } from '@angular/animations';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -37,12 +39,12 @@ export class StoreComponent implements OnInit {
   products : Products[];
   product : {} //{name:string,description:string,imgURLs:[],price:number,tags_array:[]};
   tags : string[];
-
+  description : SafeHtml = "";
   tagIndex : number = 0;
   filteredProducts : Products[]
   displayShop : boolean = false;
 
-  constructor(private route: ActivatedRoute, private purchaseService: PurchaseService, private messageService: MessageService) { }
+  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private purchaseService: PurchaseService, private messageService: MessageService , private analytics :AngularFireAnalytics) { }
   
   ngOnInit() {
     this.product = {name:'',description:'',imgURLs:[],price:0,tags_array:[]}
@@ -60,6 +62,7 @@ export class StoreComponent implements OnInit {
           // console.log(products);
           
           this.products = (products && (products['result'] == 'ok')) ? products['data'] : null
+         
           if (this.products){
             this.filteredProducts = this.products
             this.tags = this.extractTags()
@@ -104,6 +107,8 @@ export class StoreComponent implements OnInit {
   }
 
   addCart(name) {
+
+    this.analytics.logEvent('store_add_cart', { name: name })
     let product = this.products.filter( (product) => {return product['name'] == name} )[0];
     this.messageService.sendMessage({type:this.messageService.ADD_TO_CART, msg:product});
   }
@@ -115,12 +120,18 @@ export class StoreComponent implements OnInit {
     subModule.active = !subModule.active;    
   }
 
+  getInnerHTMLValue(value){
+    return this.sanitizer.bypassSecurityTrustHtml(value);
+  }
+
   onProductMoreInfo(index) {
     this.product = this.filteredProducts[index];
+    this.description = this.getInnerHTMLValue(this.product['description']);   
     let tags = this.product['tags'].split(',')
     let tagsarray = tags.map( tag => '#'+tag)
     this.product['tags_array'] = tagsarray
-    console.log(this.product)
+    // console.log(this.product)
+    this.analytics.logEvent('store_product_info', { index: index })
     UIkit.modal("#modal-product").show()
   }
 
