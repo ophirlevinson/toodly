@@ -33,7 +33,19 @@ export class PurchaseService {
   download (invoice: String, index:number) {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
-    return this.http.get(environment.serverURL + '/order/download/?invoice='+invoice+'&index='+index, { headers: headers, responseType: 'blob' })
+    return this.http.get(
+      
+      environment.serverURL + '/order/download/?invoice='+invoice+'&index='+index, 
+      { 
+         
+          responseType: 'blob',
+          reportProgress: true,
+          observe: 'events', 
+          headers: headers
+      }
+    );
+   
+   // return this.http.get(environment.serverURL + '/order/download/?invoice='+invoice+'&index='+index, { headers: headers, responseType: 'blob' })
   }
 
   getProducts (){
@@ -47,7 +59,7 @@ export class PurchaseService {
   }
 
   sendMessage(message) {
-    console.log(message)
+    // console.log(message)
     return this.http.get(environment.serverURL + '/sendmessage' + JSON.stringify(message))
   }
 
