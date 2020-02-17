@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpEventType } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { PurchaseService } from 'src/app/services/purchase.service';
 import * as FileSaver from 'file-saver';
@@ -15,6 +16,7 @@ export class SuccessComponent implements OnInit {
 
   invoice : string;
   payment : {};
+  loaded : number = 0;
   results  : string ;
   index   : number = 0;
   downloadErr : boolean = false;
@@ -31,11 +33,11 @@ export class SuccessComponent implements OnInit {
     
     this.purchaseService.getOrderDetails(this.invoice)
       .subscribe(( data ) => {
-        console.log(data)
+        
         if (data && data['result'] == 'ok'){
           this.payment = data['data']
           this.results = 'ok';
-          console.log(this.payment)
+          // console.log(this.payment)
         }  else {
           this.results = 'error';
         }  
@@ -44,20 +46,38 @@ export class SuccessComponent implements OnInit {
 
   onDownload(index) {
     this.index = index;
+    this.loaded = 0;
     this.downloadErr = false;
     let modal = UIkit.modal('#modal-center', {modal: false, keyboard: false, bgclose: false, center: true}).show();
     this.purchaseService.download(this.invoice,index)
-      .subscribe((blob) => {
-        if (blob.size == 0) {
+      .subscribe((result) => {
+        // console.log(result);
+        
+        if (result == null) {
           this.downloadErr = true;
-
         } else {
-          FileSaver.saveAs(blob, this.payment['products'][index].name+'.pdf');
-          UIkit.modal('#modal-center', {}).hide();
+
+        
+          result['total'] = this.payment['products'][index].size;
+          // console.log(result);
+          if (result.type === HttpEventType.DownloadProgress) {
+            this.loaded = Math.round( 100 * result.loaded / result.total);
+            // console.log(this.loaded);
+          
+          }
+          if (result.type === HttpEventType.Response) {
+            if (result.body.size < 100) {
+              this.downloadErr = true;
+            } else {
+              FileSaver.saveAs(result.body, this.payment['products'][index].name+'.pdf');
+              UIkit.modal('#modal-center', {}).hide();
+              
+            }
+           
+            
+            
+          }
         }
-        
-        
-        
     });
     
     
