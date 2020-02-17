@@ -1,0 +1,138 @@
+
+<div >
+        
+    <div id="main_navbar"  uk-sticky class="uk-navbar-container tm-navbar-container  uk-dark uk-sticky uk-sticky-fixed">
+        <div class="uk-container uk-container-expand">
+            <nav class="uk-navbar" >
+                <div class="uk-navbar-left">
+                        <ul class="uk-nav-default uk-navbar-nav uk-hidden@m">
+                            <li style=" position: fixed;z-index:100000; left: 0;top: 0;" id="secondary-shopping-cart" *ngIf="getQuantity() > 0" class="shopping-cart"><a style="color:#131313" uk-toggle="" href="#cart"><span uk-icon="icon: cart; ratio: 3"><span style="position:relative;left:-1.8rem">{{getQuantity()}}</span></span></a></li> 
+                        </ul>
+                    
+                    <ul class="uk-navbar-nav uk-visible@m">
+                        <li class="uk-margin-top-large">
+                            <a href="/">
+                                <img   class="" data-src="assets/images/logo_try1.svg" style="max-height: 60px" alt="טודלי - משחקים עם השראה" uk-img>    
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-center ">
+                    <ul class="uk-navbar-nav uk-visible@m">
+                            
+                        <li *ngIf="!user" title="Log In"><a (click)="showLogin()"><span uk-icon="icon: user; ratio: 1"></span></a></li>
+                        <!--<li *ngIf="!user" title="Log In"><a routerLink="/login" routerLinkActive="active"><span uk-icon="icon: sign-in; ratio: 1"></span></a></li>-->
+                        <li *ngIf="user"  title="Log Out"><a><span (click)="authService.doLogout()" uk-icon="icon: sign-in; ratio: 1"></span></a></li>  
+                        <li><a routerLink="/" routerLinkActive="active">בית</a></li> 
+                        <li><a routerLink="/store" routerLinkActive="active">חנות</a></li> 
+                        <li><a routerLink="/projects" routerLinkActive="active">פרוייקטים</a></li> 
+                        <li><a routerLink="/about" routerLinkActive="active">אודות</a></li> 
+                        <li *ngIf="user"  ><a routerLink="/orders" routerLinkActive="active">הזמנות</a></li> 
+                        <li id="main-shopping-cart" class="shopping-cart" *ngIf="getQuantity() > 0">
+                            <a uk-toggle="" href="#cart"><span uk-icon="icon: cart; ratio: 3"><span style="color:#333; position:relative;left:-1.8rem">{{getQuantity()}}</span></span>
+                            </a>
+                        </li> 
+                        <li><a href="https://www.facebook.com/pg/toodlygames" target="_blank" class="uk-icon-button;ratio:1" uk-icon="facebook"></a></li> 
+                    </ul> 
+                    
+                    
+                </div>
+                <div style="z-index:231333;margin-right:2%;" class="uk-navbar-right ">
+                        
+                    <div  class="uk-hidden@m" >
+                        <span  uk-toggle="" href="#offcanvas-nav-primary" uk-icon="icon: table;ratio:2" k-toggle="" href="#offcanvas-nav-primary" class="uk-navbar-toggle "></span>
+                        <!--<li *ngIf="cart.length > 0" class=""><a  ><span uk-icon="icon: cart; ratio: 3"><span style="position:relative;left:-1.8rem">{{cart.length}}</span></span></a></li> -->
+                    </div> 
+                </div>
+            </nav>
+        
+        </div>
+        
+        
+    </div>
+    <!--<div  style="height:1rem;width:100%;position:fixed;z-index:1000;top:4.05rem; background-image:url('assets/images/bg-edge.svg') ; background-repeat: repeat-x;"></div>-->
+    <div  style="width:100%;position:fixed;border-bottom: 1px solid #e4e4e4"></div>
+    
+   
+
+    <!-- Side Menu-->
+    <div id="offcanvas-nav-primary"  uk-offcanvas="overlay: true; flip: true">
+        <!--<button class="uk-offcanvas-close" type="button" uk-close></button>-->
+        <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+            <img   class="" data-src="assets/images/logo_try1.svg" style="max-height: 60px" alt="טודלי - משחקים עם השראה" uk-img>
+            <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                <li *ngIf="!user" title="Log In"><a (click)="showLogin()"><span uk-icon="icon: user; ratio: 1"></span></a></li>
+                <li *ngIf="user"  title="Log Out"><a><span (click)="authService.doLogout()" uk-icon="icon: sign-in; ratio: 1"></span></a></li>  
+                <li class=""><a routerLink="/" routerLinkActive="active">בית</a></li> 
+                <li class=""><a routerLink="/store" routerLinkActive="active">חנות</a></li> 
+                <li class=""><a routerLink="/projects" routerLinkActive="active">פרוייקטים</a></li> 
+                <li class=""><a routerLink="/about" routerLinkActive="active">אודות</a></li>
+                <li *ngIf="user"  ><a routerLink="/orders" routerLinkActive="active">הזמנות</a></li>  
+                <li><a href="https://www.facebook.com/pg/toodlygames" class="uk-icon-button;ratio:1" uk-icon="facebook"></a></li> 
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Cart-->
+    <div style="z-index:10000" id="cart" uk-modal class="uk-flex-top">
+        <div class="uk-modal-dialog uk-margin-auto-vertical">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header" style="margin: 0px auto;">
+                <h2 class="uk-modal-title uk-text-center">עגלת קניות</h2>
+            </div>
+            <div class="uk-modal-body" style="padding: 0.4rem;"> 
+                    <table class="uk-table uk-table-justify uk-table-divider uk-table-small ">
+                        <thead>
+                            <tr >
+                                <th style="text-align:right"class="uk-table-expand" >פריט</th>
+                                <th style="text-align:right" class="uk-table-shrink">כמות</th>
+                                <th style="text-align:right" class="uk-table-shrink">מחיר</th>
+                                <th style="text-align:right"class="" >הסרה</th>  
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of cartItems; index as i">
+                                <td >{{item.name}}</td>
+                                <td >{{item.quantity}}</td>
+                                <td> &#8362;{{item.price}}</td>
+                                <td *ngIf="cartItems[i].quantity > 1" (click)="cartItems[i].quantity = cartItems[i].quantity-1"><span style="cursor:pointer; color:red" class="uk-margin-small-right" uk-icon="icon: minus"></span></td>
+                                <td *ngIf="cartItems[i].quantity == 1" (click)="removeItem(i)"><span style="cursor:pointer; color:red" class="uk-margin-small-right" uk-icon="icon: close"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <td style="padding: 0 0.7rem;">סה"כ לתשלום : <strong>&#8362;{{getTotal()}}</strong></td>
+                    
+            </div>
+            <div  style="margin:5px" class="uk-modal-footer uk-text-right">
+                <p class="uk-margin-remove-vertical" style="font-size:0.7rem">*מייד לאחר לחיצה על הרכישה תופנו לאתר מאובטח</p>
+                <p class="uk-margin-remove-top" style="font-size:0.7rem">**ניתן לשלם בכרטיס אשראי או בחשבון paypal</p>
+                <button (click)="pay()" style="color:white" class="uk-button uk-button-primary uk-modal-close" type="button">רכישה</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login-->
+    <div style="z-index:10000" id="login" uk-modal class="uk-flex-top">
+        <div class="uk-modal-dialog uk-margin-auto-vertical"> 
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title uk-text-center">{{inLoginMode ? 'היכנסו לחשבונכם' : 'משתמש חדש'}} </h2>
+            </div>
+            <div class="uk-modal-body">
+                <modal-login></modal-login>     
+            </div>
+        </div>
+    </div>
+
+    <div  class="uk-container uk-container-small uf uk-margin-remove-top" >
+        <router-outlet ></router-outlet>
+    </div>
+    <footer class="uk-text-center uk-text-small">
+        <span>טודלי משחקים עם השראה  - כל הזכויות שמורות 2020©</span>
+    </footer>
+   
+</div>
+
+
